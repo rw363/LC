@@ -1,31 +1,60 @@
-/*
- * [73] Set Matrix Zeroes
- *
- * https://leetcode.com/problems/set-matrix-zeroes/description/
- *
- * algorithms
- * Medium (36.41%)
- * Total Accepted:    129K
- * Total Submissions: 354.3K
- * Testcase Example:  '[[0]]'
- *
- * 
- * Given a m x n matrix, if an element is 0, set its entire row and column to
- * 0. Do it in place.
- * 
- * 
- * click to show follow up.
- * 
- * Follow up:
- * 
- * 
- * Did you use extra space?
- * A straight forward solution using O(mn) space is probably a bad idea.
- * A simple improvement uses O(m + n) space, but still not the best solution.
- * Could you devise a constant space solution?
- * 
- * 
- */using namespace std;
+/*
+
+ * [73] Set Matrix Zeroes
+
+ *
+
+ * https://leetcode.com/problems/set-matrix-zeroes/description/
+
+ *
+
+ * algorithms
+
+ * Medium (36.41%)
+
+ * Total Accepted:    129K
+
+ * Total Submissions: 354.3K
+
+ * Testcase Example:  '[[0]]'
+
+ *
+
+ * 
+
+ * Given a m x n matrix, if an element is 0, set its entire row and column to
+
+ * 0. Do it in place.
+
+ * 
+
+ * 
+
+ * click to show follow up.
+
+ * 
+
+ * Follow up:
+
+ * 
+
+ * 
+
+ * Did you use extra space?
+
+ * A straight forward solution using O(mn) space is probably a bad idea.
+
+ * A simple improvement uses O(m + n) space, but still not the best solution.
+
+ * Could you devise a constant space solution?
+
+ * 
+
+ * 
+
+ */
+using namespace std;
+
 class Solution {
 public:
     void setZeroes(vector<vector<int>>& matrix) {
@@ -69,4 +98,5 @@ public:
             if (col0) matrix[i][0] = 0;
         }
     }
-};
+};
+

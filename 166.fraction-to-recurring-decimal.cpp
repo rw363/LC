@@ -81,13 +81,12 @@ public:
              map.emplace(num, ans.size());
 
              ans += to_string(num / denum);
-             num %= denum;
+             num = num % denum * 10;
              if (!decpoint && num)
              {
                   ans += '.';
                   decpoint = true;
              }
-             num *= 10;
         }
         return ans;
     }

@@ -75,11 +75,17 @@
  */
 
 using namespace std;
+     // backtrack: the input does not including duplicates, but the KEY is that we can resume the same number again and again!
+     //      1) for (int i = start; i < candidates.size(); i++)
+     //              { target -= current number; start = i (not i +1)} <----  because we can reuse same number ulimited times, we will start finding new target starting with the same index
+     //      2) because we can reuse the same number, so we cannot start > size as return condidation. therefore we use target < 0 as reuse condidition assuming all inputs are possible numbers
 
 class Solution {
 public:
      void backtrack(vector<vector<int>> &ans, vector<int> &holder, vector<int> &nums, int start, int target)
      {
+          // because we can reuse same number ulimited times, we will start finding new target starting with the same index
+          // so we cannot use start > size to exist, but rather use target < 0 as return conditition, assuming all possible input numbers
           if (target < 0)
                return;
           if (target == 0)
@@ -87,6 +93,7 @@ public:
                ans.push_back(holder);
                return;
           }
+          // do loop, with reuse the same number
           for (int i = start; i < nums.size(); i++)
           {
                holder.push_back(nums[i]);

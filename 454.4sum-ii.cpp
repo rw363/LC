@@ -71,28 +71,29 @@
  */
 
 using namespace std;
+     // use map to store the frequency of the sum of A & B, find the matching answer from the sum of C & D
+     // both time of space O(n*n)
 
 class Solution {
 public:
      int fourSumCount(vector<int>& A, vector<int>& B, vector<int>& C, vector<int>& D) {
           int count = 0;
+          // key: sum, value: frequency
           unordered_map<int, int> map;
           int n = A.size();
-          for (int i = 0; i < n; i++)
-               for (int j = 0; j < n; j++)
-                    map[A[i] + B[j]]++;
+          for(auto a:A)
+               for(auto b:B)
+                    map[a+b]++;
 
-          for (int i = 0; i < n; i++)
-          {
-               for (int j = 0; j < n; j++)
+          for (auto c:C)
+               for (auto d:D)
                {
-                    int sum = C[i] + D[j];
+                    int sum = c+d;
                     if (map.find(-sum) != map.end())
                     {
                          count+=map[-sum];
                     }
                }
-          }
 
           return count;
      }

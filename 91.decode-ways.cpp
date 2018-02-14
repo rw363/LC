@@ -76,6 +76,19 @@
 
 using namespace std;
 
+     // Note we are decoding the message not like the excel row # question, so we do not need to do calculation like AB = A*26+B
+     // if s[i~i+1] <= 26, this char can be presented with a min of 1 number
+     //      1) [0] we cannot decode a leading 0, do nothing
+     //      2) [1 ~ 9]  one way to decode
+     //      3) [10 ~ 26] two ways to decode
+     //      4) [26 ~ ] one way since it must be represented by at least two chars.  The maximum digit to look is 2
+     // Then we can use DP, scan from the back of the string, least significant digit
+     //      1) base case: a) possible[n] = 1       b) possible[n - 1] = 1 if s.back() isn't zero, otherwise 0;
+     //      2) for i [n-2 ~ 0],
+     //              a) if s[i] == '0' do nothing
+     //              b) if s[i]*10 + s[i+1] is between [1 ~ 26], ways[i] = ways[i+1] + ways[i+2]      (can be either 1 or two chars)
+     //              c) else ways[i] = ways[i+1]    (can not present with one)
+
 class Solution{
 public:
      int numDecodings(string s){

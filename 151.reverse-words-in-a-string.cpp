@@ -83,6 +83,18 @@
  * 
 
  */
+     // Reverse the whole string and then reverse each word by (always check i < size):
+     // i = 0, wordS = 0, wordE = 0.  wordE also acts like a write index
+     // while (i < size)
+     //      1) Pre-process:
+     //          a) skip spaces and move i to the start of the next word
+     //          b) if this is not the 1st word (end>0), add a space in wordE(w_i). This is safe since at least a space was deleted, hence free space
+     //      2) copy char and find end
+     //          a) wordS = wordE: prepare to check the next word
+     //          b) copy the next word (all the following non-space char) in wordE(w_i)
+     //      3) reverse word
+     //          e) reverse(s[wordS], s[wordE])
+     // Finally, s.resize(wordE)
 
 using namespace std;
 

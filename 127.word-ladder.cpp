@@ -107,26 +107,38 @@
  */
 
 using namespace std;
+     // find the distance by searching from both start and end, do so using two sets
+     // first create a dict contains all input wordlist
+     // if target word is not in dict, return 0;
+     // add start and end into two sets (every time add a word into the sets, remove it from dict to avoid loop)
+     // while (both sets are not empty (have more to search))
+     //      1) create a new list to hold the new candidates
+     //      2) search the sorter of the two sets
+     //          a) for all chars in the word, save it first then try one of the 26 chars (except itself)
+     //          b) if find it in the other set (long list), return dist
+     //          c) or, if find in the dict, we know we can get there. so add the dict word into the holder (also delet from dict)
+     //          d) restore the saved word
+     //      3) increase the dist and use the holder as the new set
 
 class Solution {
 public:
      int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
           int count = 2;
-          unordered_set<string> s1;
-          unordered_set<string> s2;
+          unordered_set<string> start;
+          unordered_set<string> target;
           unordered_set<string>dict(wordList.begin(), wordList.end());
           if (dict.find(endWord) == dict.end())
                return 0;
-          s1.insert(beginWord);
+          start.insert(beginWord);
           dict.erase(beginWord);
-          s2.insert(endWord);
+          target.insert(endWord);
           dict.erase(endWord);
-          while(!s1.empty() && !s2.empty())
+          while(!start.empty() && !target.empty())
           {
                unordered_set<string> holder;
-               if (s1.size() > s2.size())
-                    swap(s1, s2);
-               for (auto word:s1)
+               if (start.size() > target.size())
+                    swap(start, target);
+               for (auto word:start)
                {
                     for (int i = 0; i < word.size(); i++)
                     {
@@ -136,7 +148,7 @@ public:
                               if (word[i] == j)
                                    continue;
                               word[i] = j;
-                              if (s2.find(word) != s2.end())
+                              if (target.find(word) != target.end())
                                    return count;
                               if (dict.find(word) != dict.end())
                               {
@@ -148,7 +160,7 @@ public:
                     }
                }
                count ++;
-               swap(s1, holder);
+               swap(start, holder);
           }
           return 0;
      }

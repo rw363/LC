@@ -159,13 +159,9 @@ using namespace std;
              }
 
              if (isFile)
-             {
                  maxL = max(maxL, length[level-1] + len);
-             }
              else
-             {
                  length[level] = length[level-1] + len + 1;
-             }
          }
          return maxL;
      }

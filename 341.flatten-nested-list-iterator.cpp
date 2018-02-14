@@ -81,6 +81,14 @@
  */
 
 using namespace std;
+     // Simialr to 394
+     // use stack to hold the nodes store the raw list in the reverse order
+     // when get next, just pop up the top of the stack
+     // when check has next, if the stack is empty return false, otherwise do the below loop until we find an integer
+     //      1) get the top
+     //      2) if the top is integer, return true. and it can be got and poped by getnext
+     //      3) if the top is a nested list, first we pop it to avoid loop, then
+     //          get the list head, and push all nodes in the list into stacks, so we can check these nodes again
 
 class NestedIterator {
 private:

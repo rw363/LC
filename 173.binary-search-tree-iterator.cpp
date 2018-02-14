@@ -54,6 +54,10 @@
 
 using namespace std;
 
+     // since average O(1) time, cannot use recursion inorder travel
+     // and since we need to solve it with O(h) not O(n) sapce, we cannot use exact stack inorder travel
+     // modify inorder stack travel with: only push the left nodes and pop on one node from the stack each time we need a next O(h), update node = node->right to go right (since we already finished the left by now), average is O(1) execpt when we need to push left nodes
+
 class BSTIterator
 {
 private:

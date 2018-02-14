@@ -125,40 +125,49 @@
  */
 using namespace std;
 
-class Solution {
-public:
+ class Solution {
+ public:
      int lengthLongestPath(string input) {
-          int maxL = 0;
-          vector<int> levels(input.size()+1, 0);
-          int n = input.size();
-          for (int i = 0; i < n; i++)
-          {
-               bool isFile = false;
-               int lvl = 1;
-               int len = 0;
-               while(i < n && input[i] == '\t')
-               {
-                    lvl++;
-                    i++;
-               }
-               while(i < n && input[i] != '\n')
-               {
-                    if (input[i] == '.')
-                         isFile = true;
-                    len++;
-                    i++;
-               }
-               if (isFile)
-               {
-                    maxL = max(maxL, levels[lvl - 1] + len);
-               }
-               else
-               {
-                    levels[lvl] = levels[lvl - 1] + len + 1;
-               }
-          }
+         // use array to keep the length of the start of each level
+         // WHILE sees '\t', level++, i++
+         // WHILE does not see '\n',
+         //      i++, len++,
+         //      when sees '.', set isFile = true
+         // when sees '\n',
+         //      if isFile == true, maxL = max(maxL, length[level-1] + len)
+         //      else length[level] = length[level-1] + len + 1
 
-          return maxL;
+         int maxL = 0;
+         vector<int>length(input.size(), 0);
+
+         for (int i = 0; i < input.size(); i++)
+         {
+             int level = 0;
+             bool isFile = false;
+             int len = 0;
+             while(i < input.size() && input[i] == '\t')
+             {
+                 level++;
+                 i++;
+             }
+             while(i < input.size() && input[i] != '\n')
+             {
+                 if (input[i] == '.')
+                     isFile = true;
+                 i++;
+                 len++;
+             }
+
+             if (isFile)
+             {
+                 maxL = max(maxL, length[level-1] + len);
+             }
+             else
+             {
+                 length[level] = length[level-1] + len + 1;
+             }
+         }
+         return maxL;
      }
-};
+ };
 

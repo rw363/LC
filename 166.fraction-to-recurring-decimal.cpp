@@ -55,6 +55,14 @@
  */
 
 using namespace std;
+     // Similar to Q29 Divide two Interger. just simple math, while (num):
+     //     push num/den into ans; num = num%den; nums *= 10;
+     // things to note:
+     // 1) return 0 if either numerator or denominator is zero
+     // 2) check negative sign if (numerator < 0 ^ denominator < 0) ans += "-";
+     // 3) use long num = labs((long) numerator);
+     // 4) add '.' the 1st time after pushing num/den, and if num != 0
+     // 5) check if you see repeated numerator (use map to record where the repeat pattern starts)
 
 class Solution {
 public:

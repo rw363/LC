@@ -60,6 +60,11 @@
 
 using namespace std;
 
+// backtrack
+// push holder into answer if we scanned all chars in this round (start = s.size())
+// from start index to the end, check if we pass palindrome check with s [start ~ i], i.e. still palindrom after adding current char
+// if so, push_back s[start ~ i] into holder, do backtrack with start = i + 1, and pop_back
+
 class Solution {
 public:
      bool checkpalindrome(string s, int start, int end)
@@ -74,9 +79,10 @@ public:
 
      void backtrack(vector<vector<string>> &ans, vector<string> &holder, string s, int start)
      {
+          // if we finish scanning the input string this round, push what we have into the ans
           if (start == s.size())
                ans.push_back(holder);
-
+          // else if we still have a palindrome from start to this char, do backtracking
           for (int i = start; i < s.size(); i++)
           {
                if (checkpalindrome(s, start, i))

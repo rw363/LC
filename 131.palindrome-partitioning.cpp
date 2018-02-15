@@ -60,10 +60,10 @@
 
 using namespace std;
 
-// backtrack
-// push holder into answer if we scanned all chars in this round (start = s.size())
-// from start index to the end, check if we pass palindrome check with s [start ~ i], i.e. still palindrom after adding current char
-// if so, push_back s[start ~ i] into holder, do backtrack with start = i + 1, and pop_back
+     // backtrack
+     // push holder into answer if we scanned all chars in this round (start = s.size())
+     // from start index to the end, check if we pass palindrome check with s [start ~ i], i.e. still palindrom after adding current char
+     // if so, push_back s[start ~ i] into holder, do backtrack with start = i + 1, and pop_back
 
 class Solution {
 public:

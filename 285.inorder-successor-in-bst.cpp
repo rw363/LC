@@ -50,7 +50,7 @@
 
 using namespace std;
 
-     // smilar to inorder travel
+     // Similar to inorder travel
      // if we need to find successor (the next one during inorder travel), which is the most left leaf of the right side branch.
      // if the current node is small or equal, move to its right; otherwise go left, and if we got null return (cant go further), return the current
      // if we need to find the presuccessor, that is the right leaf of the left branch (mirror of the below logic)

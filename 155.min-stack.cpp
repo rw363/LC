@@ -103,17 +103,16 @@ public:
              nums.push(0L);
              return;
         }
-        long val = x - min;
-        nums.push(val);
-        if (val < 0)
+        nums.push(x - min);
+        if (x < min)
              min = x;
     }
     
     void pop() {
         long val = nums.top();
-        nums.pop();
         if (val < 0)
              min -= val;
+        nums.pop();
     }
     
     int top() {

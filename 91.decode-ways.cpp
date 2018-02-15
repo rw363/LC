@@ -92,23 +92,24 @@ using namespace std;
 class Solution{
 public:
      int numDecodings(string s){
-          int n = s.size();
-          if (n == 0)
+          if (s.empty())
                return 0;
+          int n = s.size();
           vector<int>ways(n+1, 0);
+          // scan from the back
+          // 1 way to translate an empty string
           ways[n] = 1;
+          // if the number is 0, then zero ways, otherwise 1 way to translate any 1 digit number
           ways[n-1] = s[n-1] == '0'?0:1;
-
-          for (int i = n - 2; i >= 0; i--)
+          for (int i = s.size() - 2; i >= 0; i--)
           {
                if (s[i] == '0')
                     continue;
-               if ((s[i]-'0') * 10 + (s[i+1]-'0') > 26)
+               else if ((s[i] - '0') * 10 + (s[i+1] - '0') > 26)
                     ways[i] = ways[i+1];
                else
                     ways[i] = ways[i+1] + ways[i+2];
           }
-
           return ways[0];
      }
 };

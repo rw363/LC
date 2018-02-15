@@ -23,6 +23,13 @@
  */
 using namespace std;
 
+    // use an index to track the start  of non-repeat substring
+    // use map to track if a char is a repeated one.  key: char, value: index
+    // if we find a repeated char, then
+    //      1) update start index = max(start index, history[char]+ 1). if repeated appears before start, keep start, otherwise go to next of repeated char
+    //      2) update set history[char] = i;
+    // maxL = max(maxL, i - start + 1)
+
 class Solution {
 public:
     int lengthOfLongestSubstring(string s) {

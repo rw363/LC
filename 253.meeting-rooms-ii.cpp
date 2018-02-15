@@ -55,6 +55,33 @@ using namespace std;
 class Solution {
 public:
      int minMeetingRooms(vector<Interval>& intervals) {
+          vector<int> rooms;
+          auto cmp = [](Interval &i1, Interval &i2) {return i1.start < i2.start || (i1.start == i2.start && i1.end < i2.end);};
+          sort(intervals.begin(), intervals.end(), cmp);
+          for (auto I:intervals)
+          {
+               bool found = false;
+               if (rooms.empty())
+               {
+                    rooms.push_back(I.end);
+                    continue;
+               }
+
+               for (auto &r:rooms)
+               {
+                    if (I.start >= r)
+                    {
+                         r = I.end;
+                         found = true;
+                         break;
+                    }
+               }
+               if (!found)
+                    rooms.push_back(I.end);
+          }
+
+          return rooms.size();
+          /*
           int count = 0;
           vector<int> start(intervals.size(), 0);
           vector<int> end(intervals.size(), 0);
@@ -79,6 +106,7 @@ public:
                }
           }
           return count;
+          */
      }
 };
 

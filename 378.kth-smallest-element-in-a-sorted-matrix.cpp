@@ -66,6 +66,8 @@ public:
                         break;
                 }
                 count += j;
+                if (count > k)
+                    break;
             }
             // if don't have enough small numbers, move lower boundary up to include more small numbers
             if (count < k)

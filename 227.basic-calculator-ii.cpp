@@ -68,6 +68,18 @@
 
 using namespace std;
 
+     // Simplified version of Q224 Basic Calculator without "()", but added "*/" which is similar to (). Also similar to Q150
+     // use a stack to holder the numbers.  Check for NULL input
+     // localCal (stack<long> &nums, long cur_num, char op) as below
+     //      if sees a number, find its value
+     //      if sees a space, skip it, do nothing
+     //      if sees a + , push num in stack
+     //      if sees a - , push -num in stack
+     //      if sess a * or /, pop the front and push top operator (NOTE, this is from the last op, not the current * or /) num in stack
+     // reset num and get new operator at the end of the round
+     // at the end of the loop, do the last calculation with localCal
+     // finally, add all numbers in the stack to get the ans
+
 class Solution {
 public:
      int calculate(string s) {

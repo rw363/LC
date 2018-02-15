@@ -70,26 +70,6 @@ using namespace std;
 
 class Solution {
 public:
-     void cal (stack<int> &nums, int num, char op)
-     {
-          if (op == '+')
-               nums.push(num);
-          else if (op == '-')
-               nums.push(-num);
-          else if (op == '*')
-          {
-               int tmp = nums.top();
-               nums.pop();
-               nums.push(tmp*num);
-          }
-          else if (op == '/')
-          {
-               int tmp = nums.top();
-               nums.pop();
-               nums.push(tmp/num);
-          }
-     }
-
      int calculate(string s) {
           if (s.empty())
                return 0;
@@ -106,7 +86,22 @@ public:
                {
                     num = num * 10 + s[i++] - '0';
                }
-               cal(nums, num, op);
+               if (op == '+')
+                    nums.push(num);
+               else if (op == '-')
+                    nums.push(-num);
+               else if (op == '*')
+               {
+                    int tmp = nums.top();
+                    nums.pop();
+                    nums.push(tmp*num);
+               }
+               else if (op == '/')
+               {
+                    int tmp = nums.top();
+                    nums.pop();
+                    nums.push(tmp/num);
+               }
                if (i < n)
                     op = s[i];
           }

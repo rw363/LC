@@ -70,27 +70,41 @@ using namespace std;
 
 class Solution {
 public:
-     bool wordBreak(string s, vector<string>& wordDict) {
-          unordered_set<string>dict(wordDict.begin(), wordDict.end());
-          if (s.empty())
-               return true;
-          if (dict.empty())
-               return false;
-          vector<bool>possible(s.size()+1, false);
-          possible[0] = true;
-          for (int i = 1; i <= s.size(); i++)
-          {
-               for (int x = 0; x <= i; x++)
-               {
-                    if ((possible[x] && dict.find(s.substr(x, i-x)) != dict.end()))
+    bool wordBreak(string s, vector<string>& wordDict) {
+        // DP: For all i [1 ~ s.size()+1], if it is possible to make substr(0 ~ j) from wordDict and can find substr (j ~ i) in dict then continue
+        // possible[i] = possibility of making s.substr(0, i) from wordDict
+        // init possible to s.size() + 1 of false, EXCEPT possible[0] is true as can always make empty string
+        // To find the possible substring using for (int i = 1; i < s.size() + 1; i++)
+        //      Try all possible combs of substr (0 ~ j) + substr (j ~ i) using for (int j = 0; j < i; j++)
+        //          If we knew from DP that we can make substr (0 ~ j), then try to find substr (j ~ i) in the dict
+        //              If such comb can be found, mark it so possible[i] is true ( since (0~j) + (j~i) are true) and break trying all j's to get the right comb
+        //          when find a solution for current i, continue i++ to search the next until possible[n] -> is it possible to make s[0~n-1]
+
+        // DP to hold if making substr (0 ~ i) is possible with the given dict. Init all size()+1 to false
+        vector<bool> possible (s.size()+1, false);
+        // possible to make empty array is always true
+        possible[0] = true;
+
+        // convert wordDict into set for easy search
+        unordered_set<string> dict(wordDict.begin(), wordDict.end());
+
+        // scan from first to the last char, i is the index of the possible vector, which is +1 of the s index
+        for (int i = 0; i < s.size()+1; i++)
+        {
+            for (int j = 0; j < i; j++)
+            {
+                //If we knew from DP that we can make substr (0 ~ j)
+                if (possible[j])
+                {
+                    // then try to find substr (j ~ i) in the dict
+                    if (dict.find(s.substr(j, i-j)) != dict.end())
                     {
-                         possible[i] = true;
-                         break;
+                        possible[i] = true;
+                        break;
                     }
-               }
-
-          }
-          return possible.back();
-     }
+                }
+            }
+        }
+        return possible.back();
+    }
 };
-

@@ -64,7 +64,7 @@ using namespace std;
 
      // Try draw it out manually with 1 3 5 2 8 4 6
      //      1) start with vector tails.push_back(nums[0]). tails.size() is the longest length of the increasing sequence
-     //      2) fro all incoming number, do binary search (l<=r); if (n <= tails[mid]) r = mid - 1; else l = mid + 1;   Using n <= tails to combine case C below
+     //      2) for all incoming number, do binary search (l<=r); if (n <= tails[mid]) r = mid - 1; else l = mid + 1;   Using n <= tails to combine case C below
      //          a) if the new number is smaller than a tail  (or <= to combine case C below) , update the biggest smaller tail with this new number
      //          b) if the new number is bigger than all tails, we have a new long max length, whose sequence ends with the new biggest tail.  Push the new number into the tails vector
      //          c) if the new number is equal to one of the tails, do nothing (this step can be combined with tail[x] >= n)

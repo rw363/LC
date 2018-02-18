@@ -48,39 +48,49 @@ using namespace std;
 
 class Solution {
 public:
-     int search(vector<int>& nums, int target)
-     {
-          if (nums.empty())
-               return -1;
-          int l = 0;
-          int r = nums.size() - 1;
-          while (l <= r)
-          {
-               int mid = l + (r-l)/2;
-               if (nums[mid] == target)
-                    return mid;
-               if (nums[l] == target)
-                    return l;
-               if (nums[r] == target)
-                    return r;
-               // if left in order
-               if (nums[l] < nums[mid])
-               {
-                    if (nums[l] < target && target < nums[mid])
-                         r = mid - 1;
-                    else
-                         l = mid + 1;
-               }
-               // right in order
-               else
-               {
-                    if (nums[mid] < target && target < nums[r])
-                         l = mid + 1;
-                    else
-                         r = mid - 1;
-               }
-          }
-          return -1;
-     }
-};
+    int search(vector<int>& nums, int target) {
+        // Binary search in the half that is in order.  Check if target == anyone of [mid, l, r]
+        // After rotate the orignal sorted ascending array. The array is still in ascending order except the point where the rotation happended.  If mid > left, then the left side is in order, otherwise the right side is in order
+        // Check if the target is in the range of the part that in order.
 
+        int l = 0, r = nums.size() - 1;
+        while (l <= r)
+        {
+            int mid = l + (r - l) / 2;
+            // if we find it
+            if (nums[mid] == target)
+                return mid;
+            if (nums[l] == target)
+                return l;
+            if (nums[r] == target)
+                return r;
+            // if the mid is bigger than left, then the left side is in order
+            if (nums[l] < nums[mid])
+            {
+                // check if target is in the left side
+                if (nums[l] < target && target < nums[mid])
+                {
+                    r = mid - 1;
+                }
+                // else we to got right side
+                else
+                    l = mid + 1;
+            }
+            // the right side is in order
+            else
+            {
+                // check if the target is in the right side
+                if (nums[mid] < target && target < nums[r])
+                {
+                    l = mid + 1;
+                }
+                else
+                {
+                    r = mid - 1;
+                }
+            }
+        }
+        // if we did not find anything at the end of the loop
+        return -1;
+    }
+};

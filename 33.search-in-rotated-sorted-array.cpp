@@ -80,7 +80,6 @@ public:
                          r = mid - 1;
                }
           }
-          printf("l = %d r = %d", l, r);
           return -1;
      }
 };

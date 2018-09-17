@@ -38,18 +38,11 @@ public:
 	bool check_self(int num)
 	{
 		int copy = num;
-		unordered_set<int> dict;
 		while(copy)
 		{
-			char x = copy%10;
-			if (x==0) return false;
-			dict.insert(x);
-			copy /= 10;
-		}
-		for (unordered_set<int>::iterator it = dict.begin(); it != dict.end(); it++)
-		{
-			if (num%(*it))
+			if (copy%10 == 0 || num%(copy%10) != 0)
 				return false;
+			copy /= 10;
 		}
 		return true;
 	}

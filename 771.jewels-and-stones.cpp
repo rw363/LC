@@ -42,15 +42,18 @@
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
-        unordered_set<char> jewels;
+	char jewels[256] ={0};
+        //unordered_set<char> jewels;
 	int num = 0;
 	for (auto j:J)
 	{
-		jewels.insert(j);
+		jewels[j] = 1;
+		//jewels.insert(j);
 	}
 	for (auto s:S)
 	{
-		if(jewels.find(s) != jewels.end())
+		//if(jewels.find(s) != jewels.end())
+		if (jewels[s]==1)
 			num++;
 	}
 	return num;

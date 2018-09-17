@@ -42,7 +42,7 @@
 class Solution {
 public:
     int numJewelsInStones(string J, string S) {
-	char jewels[256] ={0};
+	char jewels[256] = {0};
         //unordered_set<char> jewels;
 	int num = 0;
 	for (auto j:J)
